@@ -29,37 +29,9 @@ def main():
         index += "</a>"
     index += "</html>\n"
 
-    
-    Path("./index.html").write_text(index)
 
-    cmd = f"gh release view {newtag} --json uploadUrl --jq '.uploadUrl'"
-    try:
-        url = subprocess.run(shlex.split(cmd), capture_output=True, check=True, text=True).stdout
-    except subprocess.CalledProcessError as e:
-        print(e.stderr, file=sys.stderr)
-        print(e.stdout, file=sys.stderr)
-        sys.exit(1)
-
-    url = urlparse(url)
-
-    cmd = f"""
-gh api \
-  --method POST \
-  -H "Accept: application/vnd.github+json" \
-  -H "X-GitHub-Api-Version: 2022-11-28" \
-  -H "Content-Type: text/html" \
-  {url.scheme}://{url.hostname}{url.path[:-1]}?name=index.html \
-  --input index.html
-    """
-
-    cmd = shlex.split(cmd)
-    try:
-        output = subprocess.run(cmd, capture_output=True, check=True, text=True).stdout
-    except subprocess.CalledProcessError as e:
-        print(e.stderr, file=sys.stderr)
-        print(e.stdout, file=sys.stderr)
-        sys.exit(1)
-    pprint(json.loads(output))
+    Path("./public").mkdir(exist_ok=True)
+    Path("./public/index.html").write_text(index)
 
 if __name__ == '__main__':
     main()
