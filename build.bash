@@ -18,7 +18,8 @@ chmod +x main.pex
 wget https://files.pythonhosted.org/packages/06/5a/e11cad7b79f2cf3dd2ff8f81fa8ca667e7591d3d8451768589996b65dec1/lxml-4.9.2.tar.gz
 tar xvzf lxml-4.9.2.tar.gz
 
-for py in python3.9 python3.10 python3.11
+# for py in python3.9 python3.10 python3.11
+for py in python3.10
 do
   MACOSX_DEPLOYMENT_TARGET=11.0 PEX_PYTHON=$(which $py) SOURCE_DATE_EPOCH=0 \
     ./main.pex --lock setuptools.lock --src ./lxml-4.9.2 --out ./out --dist wheel
