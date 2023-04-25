@@ -25,6 +25,7 @@ jobs:
       - run: ./make-index.py > index.html
         env:
           NEW_TAG: ${{steps.tag_version.new_tag}}
+          GH_TOKEN: ${{ github.token }}
       - run: gh release upload ${{ steps.tag_version.new_tag }} index.html ${{ github.repository }}
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ github.token }}
