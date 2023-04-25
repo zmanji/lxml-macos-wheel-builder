@@ -23,7 +23,7 @@ def main():
     index = ""
     index += "<html>\n"
     for o in output:
-        index += "<a href='{o}'>{o}</a>\n"
+        index += f"<a href='{o}'>{o}</a>\n"
     index += "</html>\n"
 
 
