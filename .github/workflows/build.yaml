@@ -22,3 +22,9 @@ jobs:
           name: Release ${{ steps.tag_version.outputs.new_tag }}
           files: |
             ./out/*
+      - run: bash ./make-index.py > index.html
+        env:
+          NEW_TAG: ${{steps.tag_version.new_tag}}
+      - run: gh release upload ${{ steps.tag_version.new_tag }} index.html ${{ github.repository }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
