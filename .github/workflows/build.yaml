@@ -26,4 +26,4 @@ jobs:
         env:
           NEW_TAG: ${{steps.tag_version.new_tag}}
           GH_TOKEN: ${{ github.token }}
-          REPO: ${{ github. repository }}
+          REPO: ${{ github.repository }}
