@@ -22,11 +22,8 @@ jobs:
           name: Release ${{ steps.tag_version.outputs.new_tag }}
           files: |
             ./out/*
-      - run: ./make-index.py > index.html
+      - run: ./make-index.py 
         env:
           NEW_TAG: ${{steps.tag_version.new_tag}}
           GH_TOKEN: ${{ github.token }}
-      - run: gh release upload $NEW_TAG index.html -R ${{ github.repository }}
-        env:
-          GH_TOKEN: ${{ github.token }}
-          NEW_TAG: ${{steps.tag_version.new_tag}}
+          REPO: ${{ github. repository }}
