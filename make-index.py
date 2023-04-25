@@ -1,5 +1,6 @@
 #!/usr/bin/env python3.11
 
+from urllib.parse import urlparse
 from pathlib import Path
 import sys
 import os
@@ -39,21 +40,23 @@ def main():
         print(e.stdout, file=sys.stderr)
         sys.exit(1)
 
-    url.rsplit('{', maxsplit=1)[0]
+    url = urlparse(url)
 
     cmd = f"""
-    curl -L \
-  -X POST \
+gh api \
+  --method POST \
   -H "Accept: application/vnd.github+json" \
-  -H "Authorization: Bearer {token}"\
   -H "X-GitHub-Api-Version: 2022-11-28" \
   -H "Content-Type: text/html" \
-  {url}?name=index.html \
-  --data-binary "@index.html"
+  --hostname {url.hostname} \
+  {url.path[:-1]}?name=example.zip \
+  -f '@index.html'
     """
 
+    cmd = shlex.split(cmd)
+    print(cmd)
     try:
-        output = subprocess.run(shlex.split(cmd), capture_output=True, check=True, text=True).stdout.splitlines()
+        output = subprocess.run(cmd, capture_output=True, check=True, text=True).stdout.splitlines()
     except subprocess.CalledProcessError as e:
         print(e.stderr, file=sys.stderr)
         print(e.stdout, file=sys.stderr)
