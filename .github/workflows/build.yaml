@@ -26,6 +26,6 @@ jobs:
         env:
           NEW_TAG: ${{steps.tag_version.new_tag}}
           GH_TOKEN: ${{ github.token }}
-      - run: gh release upload ${{ steps.tag_version.new_tag }} index.html ${{ github.repository }}
+      - run: gh release upload ${{ steps.tag_version.new_tag }} index.html -R ${{ github.repository }}
         env:
           GH_TOKEN: ${{ github.token }}
