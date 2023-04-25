@@ -24,6 +24,6 @@ jobs:
             ./out/*
       - run: ./make-index.py 
         env:
-          NEW_TAG: ${{steps.tag_version.new_tag}}
+          NEW_TAG: ${{ steps.tag_version.outputs.new_tag }}
           GH_TOKEN: ${{ github.token }}
           REPO: ${{ github.repository }}
