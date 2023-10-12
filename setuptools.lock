@@ -83,15 +83,15 @@
         }
       ],
       "platform_tag": [
-        "cp311",
-        "cp311",
+        "cp312",
+        "cp312",
         "macosx_13_0_arm64"
       ]
     }
   ],
   "path_mappings": {},
-  "pex_version": "2.1.123",
-  "pip_version": "22.3",
+  "pex_version": "2.1.148",
+  "pip_version": "23.2",
   "prefer_older_binary": false,
   "requirements": [
     "setuptools==67.7.2",
